@@ -169,6 +169,7 @@ function createResultItem(item, category) {
         const posterPath = item.poster_path;
         const releaseDate = item.release_date || item.first_air_date || '';
         const overview = item.overview || 'Sin descripción disponible.';
+        const itemId = item.id;
         
         // Format date
         let formattedDate = '';
@@ -199,6 +200,12 @@ function createResultItem(item, category) {
                 <p class="result-overview">${truncatedOverview}</p>
             </div>
         `;
+        
+        // Make result item clickable to navigate to detail page
+        div.style.cursor = 'pointer';
+        div.addEventListener('click', () => {
+            window.open(`detail.html?id=${itemId}&type=${category}`, '_blank');
+        });
     }
     
     return div;
