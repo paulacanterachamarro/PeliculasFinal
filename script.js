@@ -100,7 +100,8 @@ if (searchForm && searchInput) {
         e.preventDefault();
         const query = searchInput.value.trim();
         if (query) {
-            searchContent(query);
+            // Open search results in a new tab
+            window.open(`search.html?query=${encodeURIComponent(query)}`, '_blank');
         }
     });
 }
