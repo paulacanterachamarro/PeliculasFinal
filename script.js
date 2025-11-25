@@ -2,9 +2,13 @@ const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTgxNWVjZTI4ZjcyNWJlZGRmY2Y3OG
 const BASE_URL = 'https://api.themoviedb.org/3';
 // Endpoint específico para "Tendencias - Hoy"
 const TRENDING_URL = `${BASE_URL}/trending/movie/day?language=es-ES`;
+// Endpoint para búsqueda multi (películas y series)
+const SEARCH_URL = `${BASE_URL}/search/multi?language=es-ES`;
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const container = document.getElementById('trending-container');
+const searchForm = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
 
 const options = {
     method: 'GET',
@@ -24,10 +28,21 @@ async function getTrendingMovies() {
     }
 }
 
-function showMovies(movies) {
+function showMovies(items) {
     container.innerHTML = '';
-    movies.forEach(movie => {
-        const { title, poster_path, vote_average, release_date } = movie;
+    items.forEach(item => {
+        // Manejar tanto películas (movie) como series (tv)
+        const title = item.title || item.name || 'Sin título';
+        const poster_path = item.poster_path;
+        const vote_average = item.vote_average || 0;
+        const release_date = item.release_date || item.first_air_date;
+        const media_type = item.media_type;
+        
+        // Ignorar personas en los resultados de búsqueda
+        if (media_type === 'person') return;
+        
+        // Si no hay poster, no mostrar
+        if (!poster_path) return;
         
         // Calcular porcentaje (e.g. 7.6 -> 76)
         const percent = Math.round(vote_average * 10);
@@ -41,8 +56,11 @@ function showMovies(movies) {
         card.classList.add('card');
         
         // Formatear fecha (e.g. "21 nov 2025")
-        const dateObj = new Date(release_date);
-        const dateStr = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+        let dateStr = '';
+        if (release_date) {
+            const dateObj = new Date(release_date);
+            dateStr = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
 
         card.innerHTML = `
             <div class="image-content">
@@ -64,3 +82,25 @@ function showMovies(movies) {
 
 // Iniciar
 getTrendingMovies();
+
+// Función para buscar películas y series
+async function searchContent(query) {
+    try {
+        const res = await fetch(`${SEARCH_URL}&query=${encodeURIComponent(query)}`, options);
+        const data = await res.json();
+        showMovies(data.results);
+    } catch (error) {
+        console.error('Error en la búsqueda:', error);
+    }
+}
+
+// Event listener para el formulario de búsqueda
+if (searchForm && searchInput) {
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        if (query) {
+            searchContent(query);
+        }
+    });
+}
