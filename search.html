@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de la búsqueda - TMDB Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo">TMDB</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Películas</a></li>
+                    <li><a href="index.html">Series</a></li>
+                    <li><a href="index.html">Gente</a></li>
+                    <li><a href="index.html">Más</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <i class="fas fa-plus"></i>
+                <div class="lang-box">ES</div>
+                <a href="#">Iniciar sesión</a>
+                <a href="#">Únete a TMDB</a>
+                <i class="fas fa-search search-icon-nav"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="search-results-container">
+        <aside class="search-sidebar">
+            <div class="sidebar-header">
+                <h2>Resultados de la búsqueda</h2>
+            </div>
+            <div class="search-categories">
+                <div class="category-item active" data-category="movie">
+                    <span class="category-name">Películas</span>
+                    <span class="category-count" id="movie-count">0</span>
+                </div>
+                <div class="category-item" data-category="person">
+                    <span class="category-name">Gente</span>
+                    <span class="category-count" id="person-count">0</span>
+                </div>
+                <div class="category-item" data-category="tv">
+                    <span class="category-name">Series</span>
+                    <span class="category-count" id="tv-count">0</span>
+                </div>
+            </div>
+            <div class="search-tip">
+                <p><strong>Consejo:</strong> puedes usar el filtro 'y:' para restringir los resultados por año. Ejemplo: 'star wars y:1977'.</p>
+            </div>
+        </aside>
+
+        <main class="search-main">
+            <div id="search-results-list" class="results-list">
+                <!-- Results will be loaded here -->
+            </div>
+            <div id="pagination" class="pagination">
+                <!-- Pagination will be loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <footer class="search-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Lo básico</h3>
+                <ul>
+                    <li><a href="#">Sobre TMDB</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Participa</h3>
+                <ul>
+                    <li><a href="#">Guía de aportaciones</a></li>
+                    <li><a href="#">Añadir nueva película</a></li>
+                    <li><a href="#">Añadir nueva serie</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Comunidad</h3>
+                <ul>
+                    <li><a href="#">Directrices</a></li>
+                    <li><a href="#">Debates</a></li>
+                    <li><a href="#">Tabla de clasificación</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Términos de uso</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Política DMCA</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="search.js"></script>
+</body>
+</html>
