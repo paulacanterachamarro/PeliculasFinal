@@ -55,7 +55,6 @@ function displayResults(items) {
         const poster_path = item.poster_path;
         const overview = item.overview || 'Sin descripción disponible.';
         const release_date = item.release_date || item.first_air_date || '';
-        const media_type = item.media_type === 'movie' ? 'Película' : 'Serie';
         
         const card = document.createElement('div');
         card.classList.add('result-card');

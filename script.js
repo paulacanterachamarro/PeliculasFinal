@@ -2,8 +2,6 @@ const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTgxNWVjZTI4ZjcyNWJlZGRmY2Y3OG
 const BASE_URL = 'https://api.themoviedb.org/3';
 // Endpoint específico para "Tendencias - Hoy"
 const TRENDING_URL = `${BASE_URL}/trending/movie/day?language=es-ES`;
-// Endpoint para búsqueda multi (películas y series)
-const SEARCH_URL = `${BASE_URL}/search/multi?language=es-ES`;
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const container = document.getElementById('trending-container');
@@ -82,17 +80,6 @@ function showMovies(items) {
 
 // Iniciar
 getTrendingMovies();
-
-// Función para buscar películas y series
-async function searchContent(query) {
-    try {
-        const res = await fetch(`${SEARCH_URL}&query=${encodeURIComponent(query)}`, options);
-        const data = await res.json();
-        showMovies(data.results);
-    } catch (error) {
-        console.error('Error en la búsqueda:', error);
-    }
-}
 
 // Event listener para el formulario de búsqueda
 if (searchForm && searchInput) {
