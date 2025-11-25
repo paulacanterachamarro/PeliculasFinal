@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMDB Clone - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="nav-left">
+                <a href="#" class="nav-logo">TMDB</a>
+                <ul class="nav-links">
+                    <li><a href="#">Películas</a></li>
+                    <li><a href="#">Series</a></li>
+                    <li><a href="#">Gente</a></li>
+                    <li><a href="#">Más</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <i class="fas fa-plus"></i>
+                <div class="lang-box">ES</div>
+                <a href="#">Iniciar sesión</a>
+                <a href="#">Únete a TMDB</a>
+                <i class="fas fa-search search-icon-nav"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Te damos la bienvenida.</h1>
+            <h3>Millones de películas, series y gente por descubrir. Explora ya.</h3>
+            
+            <div class="search-box">
+                <form id="search-form">
+                    <input type="text" id="search-input" placeholder="Buscar una película, serie, persona......">
+                    <button type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="trending-section">
+        <div class="section-header">
+            <h2>Tendencias</h2>
+            <div class="toggle-selector">
+                <div class="toggle-item active">Hoy</div>
+                <div class="toggle-item">Esta semana</div>
+            </div>
+        </div>
+
+        <div id="trending-container" class="scroller">
+            </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
