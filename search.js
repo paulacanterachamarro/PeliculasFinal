@@ -3,6 +3,10 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 const POSTER_URL = 'https://image.tmdb.org/t/p/w94_and_h141_bestv2';
 
+// Constants
+const RESULTS_PER_PAGE = 20;
+const OVERVIEW_MAX_LENGTH = 250;
+
 const options = {
     method: 'GET',
     headers: {
@@ -71,21 +75,25 @@ function setActiveCategory(category) {
 
 async function performSearch(query) {
     try {
-        // Search for movies
-        const movieRes = await fetch(`${BASE_URL}/search/movie?language=es-ES&query=${encodeURIComponent(query)}`, options);
-        const movieData = await movieRes.json();
+        // Execute all searches in parallel for better performance
+        const [movieRes, tvRes, personRes] = await Promise.all([
+            fetch(`${BASE_URL}/search/movie?language=es-ES&query=${encodeURIComponent(query)}`, options),
+            fetch(`${BASE_URL}/search/tv?language=es-ES&query=${encodeURIComponent(query)}`, options),
+            fetch(`${BASE_URL}/search/person?language=es-ES&query=${encodeURIComponent(query)}`, options)
+        ]);
+        
+        const [movieData, tvData, personData] = await Promise.all([
+            movieRes.json(),
+            tvRes.json(),
+            personRes.json()
+        ]);
+        
         allResults.movie = movieData.results || [];
         totalResults.movie = movieData.total_results || 0;
         
-        // Search for TV shows
-        const tvRes = await fetch(`${BASE_URL}/search/tv?language=es-ES&query=${encodeURIComponent(query)}`, options);
-        const tvData = await tvRes.json();
         allResults.tv = tvData.results || [];
         totalResults.tv = tvData.total_results || 0;
         
-        // Search for people
-        const personRes = await fetch(`${BASE_URL}/search/person?language=es-ES&query=${encodeURIComponent(query)}`, options);
-        const personData = await personRes.json();
         allResults.person = personData.results || [];
         totalResults.person = personData.total_results || 0;
         
@@ -174,8 +182,8 @@ function createResultItem(item, category) {
         }
         
         // Truncate overview if too long
-        const truncatedOverview = overview.length > 250 
-            ? overview.substring(0, 250) + '...' 
+        const truncatedOverview = overview.length > OVERVIEW_MAX_LENGTH 
+            ? overview.substring(0, OVERVIEW_MAX_LENGTH) + '...' 
             : overview;
         
         div.innerHTML = `
@@ -198,7 +206,7 @@ function createResultItem(item, category) {
 
 function updatePagination() {
     const total = totalResults[currentCategory];
-    const totalPages = Math.ceil(total / 20);
+    const totalPages = Math.ceil(total / RESULTS_PER_PAGE);
     
     if (totalPages <= 1) {
         paginationContainer.innerHTML = '';
