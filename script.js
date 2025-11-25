@@ -100,7 +100,8 @@ if (searchForm && searchInput) {
         e.preventDefault();
         const query = searchInput.value.trim();
         if (query) {
-            searchContent(query);
+            // Redirect to search page with query parameter
+            window.location.href = `search.html?query=${encodeURIComponent(query)}`;
         }
     });
 }
