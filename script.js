@@ -36,7 +36,8 @@ function showMovies(items) {
         const poster_path = item.poster_path;
         const vote_average = item.vote_average || 0;
         const release_date = item.release_date || item.first_air_date;
-        const media_type = item.media_type;
+        const media_type = item.media_type || 'movie';
+        const itemId = item.id;
         
         // Ignorar personas en los resultados de búsqueda
         if (media_type === 'person') return;
@@ -75,6 +76,11 @@ function showMovies(items) {
                 <p>${dateStr}</p>
             </div>
         `;
+
+        // Make card clickable to navigate to detail page
+        card.addEventListener('click', () => {
+            window.open(`detail.html?id=${itemId}&type=${media_type}`, '_blank');
+        });
 
         container.appendChild(card);
     });

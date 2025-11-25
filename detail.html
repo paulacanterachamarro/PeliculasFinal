@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles - TMDB Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo">TMDB</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Películas</a></li>
+                    <li><a href="index.html">Series</a></li>
+                    <li><a href="index.html">Gente</a></li>
+                    <li><a href="index.html">Más</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <i class="fas fa-plus"></i>
+                <div class="lang-box">ES</div>
+                <a href="#">Iniciar sesión</a>
+                <a href="#">Únete a TMDB</a>
+                <i class="fas fa-search search-icon-nav"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section id="detail-backdrop" class="detail-backdrop">
+        <div class="detail-content">
+            <div class="detail-poster">
+                <img id="poster-img" src="" alt="Poster de la película">
+            </div>
+            <div class="detail-info">
+                <h1 id="detail-title"></h1>
+                <div id="detail-meta" class="detail-meta">
+                </div>
+                <div class="detail-score-actions">
+                    <div class="detail-score">
+                        <div id="score-circle" class="score-circle">
+                            <span id="score-value">0</span><sup>%</sup>
+                        </div>
+                        <span class="score-label">Puntuación<br>de usuarios</span>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="action-btn" title="Añadir a lista"><i class="fas fa-list"></i></button>
+                        <button class="action-btn" title="Marcar como favorito"><i class="fas fa-heart"></i></button>
+                        <button class="action-btn" title="Añadir a watchlist"><i class="fas fa-bookmark"></i></button>
+                        <button class="action-btn" title="Puntuar"><i class="fas fa-star"></i></button>
+                    </div>
+                    <div id="trailer-btn" class="trailer-btn" style="display: none;">
+                        <i class="fas fa-play"></i> Reproducir tráiler
+                    </div>
+                </div>
+                <div class="detail-tagline" id="detail-tagline"></div>
+                <div class="detail-overview">
+                    <h3>Vista general</h3>
+                    <p id="detail-overview-text"></p>
+                </div>
+                <div class="detail-crew" id="detail-crew">
+                    <!-- Crew will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cast-section">
+        <h2>Reparto principal</h2>
+        <div id="cast-container" class="cast-scroller">
+            <!-- Cast will be loaded here -->
+        </div>
+        <a href="#" class="view-more-link" id="view-cast-link">Ver más →</a>
+    </section>
+
+    <section class="media-section">
+        <h2>Media</h2>
+        <div class="media-tabs">
+            <span class="media-tab active" data-tab="videos">Vídeos <span id="video-count">0</span></span>
+            <span class="media-tab" data-tab="backdrops">Imágenes de fondo <span id="backdrop-count">0</span></span>
+            <span class="media-tab" data-tab="posters">Carteles <span id="poster-count">0</span></span>
+        </div>
+        <div id="media-container" class="media-scroller">
+            <!-- Media will be loaded here -->
+        </div>
+    </section>
+
+    <section class="info-sidebar" id="info-sidebar">
+        <div class="info-item">
+            <h4>Estado</h4>
+            <p id="info-status">-</p>
+        </div>
+        <div class="info-item">
+            <h4>Idioma original</h4>
+            <p id="info-language">-</p>
+        </div>
+        <div class="info-item">
+            <h4>Presupuesto</h4>
+            <p id="info-budget">-</p>
+        </div>
+        <div class="info-item">
+            <h4>Ingresos</h4>
+            <p id="info-revenue">-</p>
+        </div>
+        <div class="info-item" id="keywords-container">
+            <h4>Palabras clave</h4>
+            <div id="keywords-list" class="keywords-list">
+                <!-- Keywords will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="search-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Lo básico</h3>
+                <ul>
+                    <li><a href="#">Sobre TMDB</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Participa</h3>
+                <ul>
+                    <li><a href="#">Guía de aportaciones</a></li>
+                    <li><a href="#">Añadir nueva película</a></li>
+                    <li><a href="#">Añadir nueva serie</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Comunidad</h3>
+                <ul>
+                    <li><a href="#">Directrices</a></li>
+                    <li><a href="#">Debates</a></li>
+                    <li><a href="#">Tabla de clasificación</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Términos de uso</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Política DMCA</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal">
+        <div class="video-modal-content">
+            <span class="video-close">&times;</span>
+            <iframe id="video-iframe" src="" style="border: none;" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script src="detail.js"></script>
+</body>
+</html>
